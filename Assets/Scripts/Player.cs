@@ -8,8 +8,13 @@ public class Player : MonoBehaviour
     private float inputValue;
     public float moveSpeed = 0;
     private Vector2 direction;
+    Vector2 startPosition;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        startPosition = transform.position;
+    }
+
     void Update()
     {
         inputValue = Input.GetAxisRaw("Horizontal");
@@ -28,5 +33,11 @@ public class Player : MonoBehaviour
         }
 
         rigidBody2d.AddForce(direction * moveSpeed * Time.deltaTime * 100);
+    }
+
+    public void ResetPlayer()
+    {
+        transform.position = startPosition;
+        rigidBody2d.velocity = Vector2.zero;
     }
 }
